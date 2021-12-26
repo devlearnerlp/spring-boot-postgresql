@@ -17,16 +17,18 @@ spec:
       containers:
       - name: spring-boot-postgres-sample
         env:
-          - name: POSTGRES_USER
+          - name: KEYVAULTCLIENTID
             valueFrom:
               secretKeyRef:
-                 name: postgres-secrets
-                 key: username
-          - name: POSTGRES_PASSWORD
+                 name: mdsp-secret-edge-kv
+                 key: KEYVAULT_CLIENT_ID
+          - name: KEYVAULTCLIENTSECRET
             valueFrom:
               secretKeyRef:
-                 name: postgres-secrets
-                 key: password
+                 name: mdsp-secret-edge-kv
+                 key: KEYVAULT_CLIENT_KEY
+          - name: KEYVAULTURI
+            value: "https://aksakv.vault.azure.net/"
           - name: POSTGRES_HOST
             valueFrom:
               configMapKeyRef:
